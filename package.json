@@ -1,0 +1,23 @@
+{
+  "name": "polygon-curve-autocompound",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nicosantangelo/polygon-curve-autocompound.git"
+  },
+  "author": "People",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicosantangelo/polygon-curve-autocompound/issues"
+  },
+  "homepage": "https://github.com/nicosantangelo/polygon-curve-autocompound#readme",
+  "dependencies": {
+    "ethers": "^5.4.1",
+    "typescript": "^4.3.5"
+  }
+}
