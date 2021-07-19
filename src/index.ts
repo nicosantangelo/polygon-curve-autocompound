@@ -12,23 +12,27 @@ export async function main() {
   console.log('Gas:', gas, 'gwei')
   // loopty-loop
   console.log('\n')
-  while (1) {
-    // get rewards
-    console.log('Fetching rewards...')
-    const wmaticRewards = await getClaimableRewards(ContractName.WMATIC)
-    console.log('Claimable WMATIC:', ethers.utils.formatEther(wmaticRewards))
-    const crvRewards = await getClaimableRewards(ContractName.CRV)
-    console.log('Claimable CRV:', ethers.utils.formatEther(crvRewards))
-    console.log('Claiming rewards...')
-    const tx = await claimRewards()
-    console.log(`Tx submitted: ${tx.hash}`)
-    console.log(`Link: https://polygonscan.com/tx/${tx.hash}`)
-    await tx.wait()
-    console.log('Claim successful!')
+  try {
+    while (1) {
+      // get rewards
+      console.log('Fetching rewards...')
+      const wmaticRewards = await getClaimableRewards(ContractName.WMATIC)
+      console.log('Claimable WMATIC:', ethers.utils.formatEther(wmaticRewards))
+      const crvRewards = await getClaimableRewards(ContractName.CRV)
+      console.log('Claimable CRV:', ethers.utils.formatEther(crvRewards))
+      console.log('Claiming rewards...')
+      const tx = await claimRewards()
+      console.log(`Tx submitted: ${tx.hash}`)
+      console.log(`Link: https://polygonscan.com/tx/${tx.hash}`)
+      await tx.wait()
+      console.log('Claim successful!')
 
-    // TODO: swap for stablecoin on quickswap, deposit on curve again
+      // TODO: swap for stablecoin on quickswap, deposit on curve again
 
-    // wait for next loop
-    await sleep(COMPOUND_INTERVAL * 60 * 1000)
+      // wait for next loop
+      await sleep(COMPOUND_INTERVAL * 60 * 1000)
+    }
+  } catch(error) {
+    console.error(`An error occurred trying to autocompound:`, error)
   }
 }
